@@ -5,6 +5,7 @@ import { SagaIterator } from 'redux-saga';
 
 import * as features from 'features';
 import { Api } from 'services/api/Api';
+import { AuthorizationApi } from 'services/authorization/Autorization';
 import * as ThemeProviderNS from 'services/theme/namespace'; // TODO: УДОЛИ
 import { namespace as NotificationNamespace } from 'services/notification';
 
@@ -21,6 +22,7 @@ export interface IAppData {
 
 export interface IDependencies {
   api: Api;
+  authorizationApi: AuthorizationApi;
 }
 
 export interface IReduxEntry {
@@ -43,6 +45,7 @@ export interface IAppReduxState {
   usersSearch: features.usersSearch.namespace.IReduxState;
   repositoriesSearch: features.repositoriesSearch.namespace.IReduxState;
   profile: features.profile.namespace.IReduxState;
+  authorization: features.authorization.namespace.IReduxState;
 }
 
 export type RootSaga = (deps: IDependencies) => () => SagaIterator;
