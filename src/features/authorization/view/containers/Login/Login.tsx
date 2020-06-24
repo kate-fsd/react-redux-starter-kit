@@ -10,7 +10,7 @@ import { Button, Link } from 'shared/view/elements';
 import { IAppReduxState } from 'shared/types/app';
 
 import { ISignUpPayload } from '../../../namespace';
-import { actionCreators, selectors } from './../../../redux';
+import { actionCreators, selectors } from '../../../redux';
 
 //import './SignUpCard.scss';
 
@@ -61,8 +61,6 @@ class SignUpCardComponent extends React.PureComponent<IProps> {
     const { t } = this.props;
     return (
       <form className={b()} onSubmit={handleSubmit}>
-        {/* {getState()} */}
-
         <Link href='/authorization/login'>
           {t(intl.login)}
         </Link>
@@ -103,7 +101,7 @@ class SignUpCardComponent extends React.PureComponent<IProps> {
   }
 }
 
-const connectedComponent = connect(mapState, mapDispatch)(SignUpCardComponent);
-const SignUpCard = withTranslation()(connectedComponent);
+const connectedComponent = connect(mapState, mapDispatch)(LoginCardComponent);
+const LoginCard = withTranslation()(connectedComponent);
 
-export { SignUpCard, SignUpCardComponent, IProps as ISignUpProps }
+export { LoginCard, LoginCardComponent, IProps as ILoginProps }

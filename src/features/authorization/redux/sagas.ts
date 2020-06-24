@@ -14,14 +14,32 @@ interface ISignUpResult {
 
 function getSaga(deps: IDependencies) {
   const signUpType: NS.ISignUp['type'] = 'SIGN_UP';
+  const LoginType: NS.ISignUp['type'] = 'LOGIN';
+
   return function* saga(): SagaIterator {
     yield all([
-      takeLatest(signUpType, executeSignUp, deps)
+      takeLatest(signUpType, executeSignUp, deps),
+      takeLatest(LoginType, executeLogin, deps)
     ]);
   };
 }
 
 function* executeSignUp({ authorizationApi }: IDependencies, { payload }: NS.ISignUp) {
+  try {
+    const { email, password } = payload;
+    const signUpResult: ISignUpResult = yield call(authorizationApi.signUp, email, password);
+
+    yield put(actionCreators.signUpSuccess({ email: signUpResult.user.email }));
+
+  } catch (error) {
+    const errorMsg = getErrorMsg(error);
+
+    yield put(actionCreators.signUpFail(errorMsg));
+    yield put(notificationActionCreators.setNotification({ kind: 'error', text: errorMsg }));
+  }
+}
+
+function* executeLogin({ authorizationApi }: IDependencies, { payload }: NS.ISignUp) {
   try {
     const { email, password } = payload;
     const signUpResult: ISignUpResult = yield call(authorizationApi.signUp, email, password);
