@@ -12,9 +12,13 @@ interface ISignUpResult {
   user: {email: string}
 }
 
+interface ILoginResult {
+  user: {email: string}
+}
+
 function getSaga(deps: IDependencies) {
   const signUpType: NS.ISignUp['type'] = 'SIGN_UP';
-  const LoginType: NS.ISignUp['type'] = 'LOGIN';
+  const LoginType: NS.ILogin['type'] = 'LOGIN';
 
   return function* saga(): SagaIterator {
     yield all([
@@ -39,17 +43,17 @@ function* executeSignUp({ authorizationApi }: IDependencies, { payload }: NS.ISi
   }
 }
 
-function* executeLogin({ authorizationApi }: IDependencies, { payload }: NS.ISignUp) {
+function* executeLogin({ authorizationApi }: IDependencies, { payload }: NS.ILogin) {
   try {
     const { email, password } = payload;
-    const signUpResult: ISignUpResult = yield call(authorizationApi.signUp, email, password);
+    const loginResult: ILoginResult = yield call(authorizationApi.signIn, email, password);
 
-    yield put(actionCreators.signUpSuccess({ email: signUpResult.user.email }));
+    yield put(actionCreators.loginSuccess({ email: loginResult.user.email }));
 
   } catch (error) {
     const errorMsg = getErrorMsg(error);
 
-    yield put(actionCreators.signUpFail(errorMsg));
+    yield put(actionCreators.loginFail(errorMsg));
     yield put(notificationActionCreators.setNotification({ kind: 'error', text: errorMsg }));
   }
 }

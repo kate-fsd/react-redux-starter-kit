@@ -16,4 +16,14 @@ export const communicationReducer = combineReducers<NS.IReduxState['communicatio
     'SIGN_UP_FAIL',
     initial.communication.signUp,
   ),
+  login: makeCommunicationReducer<
+  NS.ILogin,
+  NS.ILoginSuccess,
+  NS.ILoginFail
+  >(
+    'LOGIN',
+    'LOGIN_SUCCESS',
+    'LOGIN_FAIL',
+    initial.communication.login,
+  ),
 });

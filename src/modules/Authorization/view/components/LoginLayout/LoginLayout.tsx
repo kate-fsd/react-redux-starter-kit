@@ -2,37 +2,37 @@ import React from 'react';
 import block from 'bem-cn';
 
 //import * as features from 'features';
-import * as signUp from 'features/authorization';
+import * as login from 'features/authorization';
 import { withAsyncFeatures } from 'core';
 import { useTranslation, tKeys } from 'services/i18n';
 
 import { Layout } from '../../../../shared';
-//import './SignUpLayout.scss';
+//import './LoginLayout.scss';
 
 interface IFeatureProps {
-  signUpFeatureEntry: signUp.Entry;
+  loginFeatureEntry: login.Entry;
 }
 
 type IProps = IFeatureProps;
 
-const b = block('sign-up-layout');
+const b = block('login-layout');
 
-function SignUpLayoutComponent(props: IProps) {
-  const { signUpFeatureEntry: { containers } } = props;
-  const { SignUpCard } = containers;
+function LoginLayoutComponent(props: IProps) {
+  const { loginFeatureEntry: { containers } } = props;
+  const { LoginCard } = containers;
   const { t } = useTranslation();
 
   return (
-    <Layout title={t(tKeys.features.authorization.signUp)}>
+    <Layout title={t(tKeys.features.authorization.login)}>
       <div className={b()}>
-        <SignUpCard />
+        <LoginCard />
       </div>
     </Layout>
   );
 }
 
-const SignUpLayout = withAsyncFeatures({
-  signUpFeatureEntry: signUp.loadEntry,
-})(SignUpLayoutComponent);
+const LoginLayout = withAsyncFeatures({
+  loginFeatureEntry: login.loadEntry,
+})(LoginLayoutComponent);
 
-export { SignUpLayout, SignUpLayoutComponent, IProps as ISignUpLayoutProps };
+export { LoginLayout, LoginLayoutComponent, IProps as ILoginLayoutProps };

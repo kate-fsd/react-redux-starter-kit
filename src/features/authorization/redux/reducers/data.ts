@@ -8,6 +8,11 @@ function dataReducer(state: NS.IReduxState['data'] = initial.data, action: NS.IA
       return { ...state, user: email };
     }
 
+    case 'LOGIN_SUCCESS': {
+      const email = action.payload.email;
+      return { ...state, user: email };
+    }
+
     default:
       return state;
   }

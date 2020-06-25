@@ -1,2 +1,2 @@
 export { SignUpCard } from './SignUpCard/SignUpCard';
-export { Login } from './Login/Login';
+export { LoginCard } from './LoginCard/LoginCard';

@@ -11,3 +11,13 @@ export const {
   'SIGN_UP_SUCCESS',
   'SIGN_UP_FAIL',
 );
+
+export const {
+  execute: login,
+  completed: loginSuccess,
+  failed: loginFail,
+} = makeCommunicationActionCreators<NS.ILogin, NS.ILoginSuccess, NS.ILoginFail>(
+  'LOGIN',
+  'LOGIN_SUCCESS',
+  'LOGIN_FAIL',
+);

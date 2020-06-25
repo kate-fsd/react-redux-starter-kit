@@ -9,29 +9,29 @@ import { TextInputField } from 'shared/view/form';
 import { Button, Link } from 'shared/view/elements';
 import { IAppReduxState } from 'shared/types/app';
 
-import { ISignUpPayload } from '../../../namespace';
+import { ILoginPayload } from '../../../namespace';
 import { actionCreators, selectors } from '../../../redux';
 
-//import './SignUpCard.scss';
+//import './LoginCard.scss';
 
 interface IOwnProps {
-  //onSubmit(values: ISignUpPayload): void;
+  //onSubmit(values: ILoginPayload): void;
 }
 
 interface IStateProps {
-  isUserSigningUp: boolean;
+  //isUserSigningUp: boolean;
 }
 
 type IActionProps = typeof mapDispatch;
 type IProps = IOwnProps & IStateProps & IActionProps & ITranslationProps;
 
 const mapDispatch = {
-  signUp: actionCreators.signUp,
+  login: actionCreators.login,
 };
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
-    isUserSigningUp: selectors.selectCommunication(state, 'signUp').isRequesting,
+    isUserSigningUp: selectors.selectCommunication(state, 'login').isRequesting,
   };
 }
 
@@ -40,7 +40,7 @@ const { authorization: intl } = tKeys.features;
 
 //const helper = (<div>Подсказка</div>);
 
-class SignUpCardComponent extends React.PureComponent<IProps> {
+class LoginCardComponent extends React.PureComponent<IProps> {
   public render() {
     return (
       <Form
@@ -52,8 +52,8 @@ class SignUpCardComponent extends React.PureComponent<IProps> {
   }
 
   @autobind
-  private handleFormSubmit(values: ISignUpPayload) {
-    this.props.signUp(values);
+  private handleFormSubmit(values: ILoginPayload) {
+    this.props.login(values);
   }
 
   @autobind
@@ -61,8 +61,8 @@ class SignUpCardComponent extends React.PureComponent<IProps> {
     const { t } = this.props;
     return (
       <form className={b()} onSubmit={handleSubmit}>
-        <Link href='/authorization/login'>
-          {t(intl.login)}
+        <Link href='/authorization/signUp'>
+          {t(intl.signUp)}
         </Link>
 
         <div className={b('text-input-field', 'email')}>
@@ -83,7 +83,6 @@ class SignUpCardComponent extends React.PureComponent<IProps> {
             required={true}
             type='password'
             label={t(intl.password)}
-            helperText='Подсказка'
             t={t}
           />
         </div>
@@ -93,7 +92,7 @@ class SignUpCardComponent extends React.PureComponent<IProps> {
             variant="outlined" 
             type="submit"
           >
-            {t(intl.buttonSignUp)}
+            {t(intl.buttonLogin)}
           </Button>
         </div>
       </form>
