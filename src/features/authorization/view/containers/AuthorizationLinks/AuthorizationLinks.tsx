@@ -1,3 +1,4 @@
+//import './AuthorizationLinks.scss';
 import React from "react";
 import block from "bem-cn";
 import { connect } from "react-redux";
@@ -13,14 +14,14 @@ import { IAppReduxState } from "shared/types/app";
 import { ISignUpPayload } from "../../../namespace";
 import { actionCreators, selectors } from "./../../../redux";
 
-//import './AuthorizationLinks.scss';
+
 
 interface IOwnProps {
   //onSubmit(values: ISignUpPayload): void;
 }
 
 interface IStateProps {
-  //user: any;
+  user: any;
 }
 
 type IActionProps = typeof mapDispatch;
@@ -31,7 +32,7 @@ const mapDispatch = {
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
-    //user: state.authorization.data.user
+    user: state.authorization.data.user
   };
 }
 
@@ -40,13 +41,23 @@ const { authorization: intl } = tKeys.features;
 
 //const helper = (<div>Подсказка</div>);
 
+const blockStyle={
+  display: 'flex',
+}
+
+const textStyle={
+  color: '#fff',
+  display: 'block'
+}
+
 class AuthorizationLinksComponent extends React.PureComponent<IProps> {
   public render() {
-    const { t } = this.props;
+    const { t, user } = this.props;
+    
 
     return (
-      <div className={b()}>
-        <div className={b("user")}>User: {"user"}</div>
+      <div className={b()}  style={blockStyle} >
+        <div className={b("user")} style={textStyle} >User: {user}</div>
 
         <div className={b("button")}>
           <Link to="/authorization/login">
@@ -57,7 +68,7 @@ class AuthorizationLinksComponent extends React.PureComponent<IProps> {
         </div>
 
         <div className={b("button")}>
-          <Link to="/authorization/login">
+          <Link to="/authorization/signUp">
             <Button type="submit" href="/authorization/signUp" variant="contained">
               {t(intl.buttonSignUp)}
             </Button>

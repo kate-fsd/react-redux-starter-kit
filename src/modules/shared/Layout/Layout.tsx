@@ -42,7 +42,7 @@ class LayoutComponent extends React.Component<IProps> {
               />
             </div>
             <div className={b('right-menu')}>
-              <div className={b('authorization-links')}><AuthorizationLinks /></div>
+              {/* <div className={b('authorization-links')}><AuthorizationLinks /></div> */}
               
               <ProfilePreview onEditClick={this.handleEditProfileClick} />
               <div className={b('language-selector')}><LanguageSelector /></div>
