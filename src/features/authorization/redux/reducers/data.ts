@@ -13,6 +13,10 @@ function dataReducer(state: NS.IReduxState['data'] = initial.data, action: NS.IA
       return { ...state, user: email };
     }
 
+    // case 'LOGOUT': {
+    //   return { ...state, user: '' };
+    // }
+
     default:
       return state;
   }

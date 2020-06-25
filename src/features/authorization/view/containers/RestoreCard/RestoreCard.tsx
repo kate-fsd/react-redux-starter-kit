@@ -10,40 +10,38 @@ import { TextInputField } from 'shared/view/form';
 import { Button } from 'shared/view/elements';
 import { IAppReduxState } from 'shared/types/app';
 
-import { ISignUpPayload } from '../../../namespace';
-import { actionCreators, selectors } from './../../../redux';
+import { IRestorePayload } from '../../../namespace';
+import { actionCreators, selectors } from '../../../redux';
 
-//import './SignUpCard.scss';
+//import './RestoreCard.scss';
 
 interface IOwnProps {
-  //onSubmit(values: ISignUpPayload): void;
+  //onSubmit(values: IRestorePayload): void;
 }
 
 interface IStateProps {
   isUserSigningUp: boolean;
-  user: string;
 }
 
 type IActionProps = typeof mapDispatch;
 type IProps = IOwnProps & IStateProps & IActionProps & ITranslationProps;
 
 const mapDispatch = {
-  signUp: actionCreators.signUp,
+  restore: actionCreators.restore,
 };
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
-    isUserSigningUp: selectors.selectCommunication(state, 'signUp').isRequesting,
-    user: state.authorization.data.user,
+    isUserSigningUp: selectors.selectCommunication(state, 'restore').isRequesting,
   };
 }
 
-const b = block('sign-up-card');
+const b = block('restore-card');
 const { authorization: intl } = tKeys.features;
 
 //const helper = (<div>Подсказка</div>);
 
-class SignUpCardComponent extends React.PureComponent<IProps> {
+class RestoreCardComponent extends React.PureComponent<IProps> {
   public render() {
     return (
       <Form
@@ -55,20 +53,24 @@ class SignUpCardComponent extends React.PureComponent<IProps> {
   }
 
   @autobind
-  private handleFormSubmit(values: ISignUpPayload) {
-    this.props.signUp(values);
+  private handleFormSubmit(values: IRestorePayload) {
+    this.props.restore(values);
   }
 
   @autobind
   private renderForm({ handleSubmit }: FormRenderProps) {
-    const { t, user } = this.props;
+    const { t } = this.props;
     return (
       <form className={b()} onSubmit={handleSubmit}>
-        {'state=' + user}
+        {/* {getState()} */}
 
         <Link to='/authorization/login'>
           {t(intl.login)}
         </Link>
+
+        <p className={b('text')}>
+          {t(intl.restoreText)}
+        </p>
 
         <div className={b('text-input-field', 'email')}>
           <TextInputField
@@ -81,24 +83,12 @@ class SignUpCardComponent extends React.PureComponent<IProps> {
           />
         </div>
 
-        <div className={b('text-input-field', 'email')}>
-          <TextInputField
-            id='password'
-            name='password'
-            required={true}
-            type='password'
-            label={t(intl.password)}
-            helperText='Подсказка'
-            t={t}
-          />
-        </div>
-
         <div className={b('button')}>
           <Button 
             variant="outlined" 
             type="submit"
           >
-            {t(intl.buttonSignUp)}
+            {t(intl.buttonRestore)}
           </Button>
         </div>
       </form>
@@ -106,7 +96,7 @@ class SignUpCardComponent extends React.PureComponent<IProps> {
   }
 }
 
-const connectedComponent = connect(mapState, mapDispatch)(SignUpCardComponent);
-const SignUpCard = withTranslation()(connectedComponent);
+const connectedComponent = connect(mapState, mapDispatch)(RestoreCardComponent);
+const RestoreCard = withTranslation()(connectedComponent);
 
-export { SignUpCard, SignUpCardComponent, IProps as ISignUpProps }
+export { RestoreCard, RestoreCardComponent, IProps as IRestoreProps }

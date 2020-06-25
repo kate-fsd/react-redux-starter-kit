@@ -11,6 +11,7 @@ import * as features from 'features';
 import { routes } from '../../routes';
 import { LayoutHeaderMenu, IHeaderMenuItem } from './LayoutHeaderMenu/LayoutHeaderMenu';
 import './Layout.scss';
+import { AuthorizationLinks } from 'features/authorization/view/containers/AuthorizationLinks/AuthorizationLinks';
 
 interface IOwnProps {
   title: string;
@@ -41,6 +42,8 @@ class LayoutComponent extends React.Component<IProps> {
               />
             </div>
             <div className={b('right-menu')}>
+              <div className={b('authorization-links')}><AuthorizationLinks /></div>
+              
               <ProfilePreview onEditClick={this.handleEditProfileClick} />
               <div className={b('language-selector')}><LanguageSelector /></div>
             </div>

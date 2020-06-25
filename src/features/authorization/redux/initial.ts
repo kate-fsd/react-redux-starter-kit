@@ -8,7 +8,8 @@ const initial: IReduxState = {
   },
   communication: {
     signUp: initialCommunicationField,
-    login: initialCommunicationField
+    login: initialCommunicationField,
+    restore: initialCommunicationField
   }
 };
 

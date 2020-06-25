@@ -75,6 +75,7 @@ export const en = {
     authorization: {
       buttonSignUp: 'Sign up',
       buttonLogin: 'Login',
+      buttonRestore: 'Send new password',
       or: 'or',
       email: 'Email',
       password: 'Password',
@@ -87,6 +88,7 @@ export const en = {
       ruleDigit: 'One digit',
       ruleMinSigns: 'Min 8 signs',
       login: 'Login',
+      restore: 'Restore password',
       restorePassword: 'Restore password',
       restoreText: 'Remind us your email, and we will send a new password',
     }

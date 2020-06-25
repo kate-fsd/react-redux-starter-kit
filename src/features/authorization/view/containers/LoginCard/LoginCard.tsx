@@ -2,13 +2,15 @@ import React from 'react';
 import block from 'bem-cn';
 import { connect } from 'react-redux';
 import { Form, FormRenderProps } from 'react-final-form';
+import { Link } from 'react-router-dom';
 import { autobind } from 'core-decorators';
 
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { TextInputField } from 'shared/view/form';
-import { Button, Link } from 'shared/view/elements';
+import { Button } from 'shared/view/elements';
 import { IAppReduxState } from 'shared/types/app';
 
+import { routes } from 'modules/routes';
 import { ILoginPayload } from '../../../namespace';
 import { actionCreators, selectors } from '../../../redux';
 
@@ -61,9 +63,12 @@ class LoginCardComponent extends React.PureComponent<IProps> {
     const { t } = this.props;
     return (
       <form className={b()} onSubmit={handleSubmit}>
-        <Link href='/authorization/signUp'>
-          {t(intl.signUp)}
-        </Link>
+
+        <div className={b('link', 'signUp')}>
+          <Link to={routes.authorization.signUp.getRoutePath()}>
+            {t(intl.signUp)}
+          </Link>
+        </div>
 
         <div className={b('text-input-field', 'email')}>
           <TextInputField
@@ -95,6 +100,13 @@ class LoginCardComponent extends React.PureComponent<IProps> {
             {t(intl.buttonLogin)}
           </Button>
         </div>
+
+        <div className={b('link', 'restore')}>
+          <Link to={routes.authorization.restore.getRoutePath()}>
+            {t(intl.restorePassword)}
+          </Link>
+        </div>
+
       </form>
     )
   }

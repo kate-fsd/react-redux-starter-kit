@@ -19,11 +19,13 @@ interface ILoginResult {
 function getSaga(deps: IDependencies) {
   const signUpType: NS.ISignUp['type'] = 'SIGN_UP';
   const LoginType: NS.ILogin['type'] = 'LOGIN';
+  const RestoreType: NS.IRestore['type'] = 'RESTORE';
 
   return function* saga(): SagaIterator {
     yield all([
       takeLatest(signUpType, executeSignUp, deps),
-      takeLatest(LoginType, executeLogin, deps)
+      takeLatest(LoginType, executeLogin, deps),
+      takeLatest(RestoreType, executeRestore, deps)
     ]);
   };
 }
@@ -34,6 +36,7 @@ function* executeSignUp({ authorizationApi }: IDependencies, { payload }: NS.ISi
     const signUpResult: ISignUpResult = yield call(authorizationApi.signUp, email, password);
 
     yield put(actionCreators.signUpSuccess({ email: signUpResult.user.email }));
+    yield put(notificationActionCreators.setNotification({ kind: 'info', text: 'You successfully signed up!' }));
 
   } catch (error) {
     const errorMsg = getErrorMsg(error);
@@ -49,6 +52,22 @@ function* executeLogin({ authorizationApi }: IDependencies, { payload }: NS.ILog
     const loginResult: ILoginResult = yield call(authorizationApi.signIn, email, password);
 
     yield put(actionCreators.loginSuccess({ email: loginResult.user.email }));
+    yield put(notificationActionCreators.setNotification({ kind: 'info', text: 'You successfully logged in!' }));
+
+  } catch (error) {
+    const errorMsg = getErrorMsg(error);
+
+    yield put(actionCreators.loginFail(errorMsg));
+    yield put(notificationActionCreators.setNotification({ kind: 'error', text: errorMsg }));
+  }
+}
+
+function* executeRestore({ authorizationApi }: IDependencies, { payload }: NS.IRestore) {
+  try {
+    const { email } = payload;
+
+    yield call(authorizationApi.resetPassword, email);
+    yield put(notificationActionCreators.setNotification({ kind: 'info', text: 'New password was sent to your mail' }));
 
   } catch (error) {
     const errorMsg = getErrorMsg(error);

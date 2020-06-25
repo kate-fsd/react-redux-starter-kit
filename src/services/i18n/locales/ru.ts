@@ -77,6 +77,7 @@ export const ru = {
     authorization: {
       buttonSignUp: 'Зарегистрироваться',
       buttonLogin: 'Войти',
+      buttonRestore: 'Отправить новый пароль',
       or: 'или',
       email: 'Email',
       password: 'Пароль',
@@ -89,6 +90,7 @@ export const ru = {
       ruleDigit: 'Одна цифра',
       ruleMinSigns: 'Минимум 8 знаков',
       login: 'Войти',
+      restore: 'Восстановить пароль',
       restorePassword: 'Восстановиить пароль',
       restoreText: 'Напомните нем вашу почту, и мы пришлем новый пароль',
     },

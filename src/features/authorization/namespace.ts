@@ -1,4 +1,4 @@
-import { ICommunication, IPlainFailAction, IAction } from 'shared/types/redux';
+import { ICommunication, IPlainFailAction, IAction, IPlainAction } from 'shared/types/redux';
 
 export interface IReduxState {
   data: {
@@ -7,6 +7,7 @@ export interface IReduxState {
   communication: {
     signUp: ICommunication;
     login: ICommunication;
+    restore: ICommunication;
   };
 }
 
@@ -25,10 +26,22 @@ export type ILogin = IAction<'LOGIN', ILoginPayload>;
 export type ILoginSuccess = IAction<'LOGIN_SUCCESS', ILoginSuccessPayload>;
 export type ILoginFail = IPlainFailAction<'LOGIN_FAIL'>;
 
+
+export type IRestorePayload = { email: string };
+
+export type IRestore = IAction<'RESTORE', IRestorePayload>;
+export type IRestoreSuccess = IPlainAction<'RESTORE_SUCCESS'>;
+export type IRestoreFail = IPlainFailAction<'RESTORE_FAIL'>;
+
+//export type ILogout = IPlainAction<'LOGOUT'>;
+
 export type IAction =
   | ISignUp
   | ISignUpSuccess
   | ISignUpFail
   | ILogin
   | ILoginSuccess
-  | ILoginFail;
+  | ILoginFail
+  | IRestore
+  | IRestoreSuccess
+  | IRestoreFail;

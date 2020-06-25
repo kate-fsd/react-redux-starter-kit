@@ -21,3 +21,13 @@ export const {
   'LOGIN_SUCCESS',
   'LOGIN_FAIL',
 );
+
+export const {
+  execute: restore,
+  completed: restoreSuccess,
+  failed: restoreFail,
+} = makeCommunicationActionCreators<NS.IRestore, NS.IRestoreSuccess, NS.IRestoreFail>(
+  'RESTORE',
+  'RESTORE_SUCCESS',
+  'RESTORE_FAIL',
+);

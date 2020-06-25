@@ -1,10 +1,10 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 
-import { routes } from 'modules/routes';
-import { IModule } from 'shared/types/app';
+import { routes } from "modules/routes";
+import { IModule } from "shared/types/app";
 
-import { SignUpLayout, LoginLayout } from './view/components';
+import { SignUpLayout, LoginLayout, RestoreLayout } from "./view/components";
 
 const Authorization: IModule = {
   getRoutes() {
@@ -20,10 +20,16 @@ const Authorization: IModule = {
             component={SignUpLayout}
           />
 
-        <Route
+          <Route
             key={routes.authorization.login.getElementKey()}
             path={routes.authorization.login.getRoutePath()}
             component={LoginLayout}
+          />
+
+          <Route
+            key={routes.authorization.restore.getElementKey()}
+            path={routes.authorization.restore.getRoutePath()}
+            component={RestoreLayout}
           />
         </Switch>
       </Route>
