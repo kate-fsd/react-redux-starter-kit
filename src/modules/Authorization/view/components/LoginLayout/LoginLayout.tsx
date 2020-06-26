@@ -6,7 +6,7 @@ import { withAsyncFeatures } from 'core';
 import { useTranslation, tKeys } from 'services/i18n';
 
 import { Layout } from '../../../../shared';
-//import './LoginLayout.scss';
+import './LoginLayout.scss';
 
 interface IFeatureProps {
   loginFeatureEntry: login.Entry;

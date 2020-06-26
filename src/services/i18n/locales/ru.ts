@@ -91,7 +91,7 @@ export const ru = {
       ruleMinSigns: 'Минимум 8 знаков',
       login: 'Войти',
       restore: 'Восстановить пароль',
-      restorePassword: 'Восстановиить пароль',
+      restorePassword: 'Восcтановить пароль',
       restoreText: 'Напомните нем вашу почту, и мы пришлем новый пароль',
     },
   },

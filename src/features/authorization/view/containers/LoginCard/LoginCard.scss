@@ -1,16 +1,39 @@
 .login-card {
   display: flex;
   flex-direction: column;
+  padding: 20px;
   max-width: 500px;
   width: 100%;
-  padding: 20px;
 
-  // &__sign-up-link {
-  //   align-self: flex-end;
+  &__sign-up {
+    align-self: flex-end;
+    margin-bottom: 20px;
+  }
 
-  //   &:after {
-  //     content: '→';
-  //     font-size: 40px;
-  //   }
-  // }
+  &__sign-up-link {
+    text-decoration: none;
+
+    &::after {
+      display: inline;
+      content: "→";
+      font-size: 19px;
+    }
+  }
+
+  &__text-field {
+    margin-bottom: 10px;
+  }
+
+  &__button {
+    margin: 40px auto 20px;
+  }
+
+  &__restore {
+    text-align: center;
+  }
+
+  &__restore-link {
+    text-decoration: none;
+    font-size: 14px;
+  }
 }

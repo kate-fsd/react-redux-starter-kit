@@ -1,4 +1,30 @@
 .sign-up-card {
-  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 500px;
   width: 100%;
+
+  &__login {
+    align-self: flex-end;
+    margin-bottom: 20px;
+  }
+
+  &__login-link {
+    text-decoration: none;
+
+    &::after {
+      display: inline;
+      content: "→";
+      font-size: 19px;
+    }
+  }
+
+  &__text-field {
+    margin-bottom: 10px;
+  }
+
+  &__button {
+    margin: 40px auto 20px;
+  }
 }

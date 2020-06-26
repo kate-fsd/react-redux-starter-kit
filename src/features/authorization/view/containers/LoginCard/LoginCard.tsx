@@ -12,21 +12,11 @@ import { Button } from "shared/view/elements";
 import { routes } from "modules/routes";
 import { ILoginPayload } from "../../../namespace";
 import { actionCreators } from "../../../redux";
-//import "./LoginCard.scss";
-//import { IAppReduxState } from 'shared/types/app';
+import "./LoginCard.scss";
 
-interface IOwnProps {
-  //handleFormSubmit(values: ILoginPayload): void;
-  //renderForm({ handleSubmit }: FormRenderProps): void;
-}
-
-// interface IStateProps {
-//   //isUserSigningUp: boolean;
-//   //user: string;
-// }
 
 type IActionProps = typeof mapDispatch;
-type IProps = IOwnProps & IActionProps & ITranslationProps;
+type IProps = IActionProps & ITranslationProps;
 
 const mapDispatch = {
   login: actionCreators.login,
@@ -35,14 +25,6 @@ const mapDispatch = {
 const b = block("login-card");
 const { authorization: intl } = tKeys.features;
 
-// function mapState(state: IAppReduxState): IStateProps {
-//   return {
-//     //isUserSigningUp: selectors.selectCommunication(state, 'signUp').isRequesting,
-//     //user: state.authorization.data.user,
-//   };
-// }
-
-//const helper = (<div>Подсказка</div>);
 
 class LoginCardComponent extends React.PureComponent<IProps> {
   public render() {
@@ -97,7 +79,7 @@ class LoginCardComponent extends React.PureComponent<IProps> {
         </div>
 
         <div className={b("button")}>
-          <Button variant="outlined" type="submit">
+          <Button variant="outlined" type="submit" >
             {t(intl.buttonLogin)}
           </Button>
         </div>
@@ -107,7 +89,7 @@ class LoginCardComponent extends React.PureComponent<IProps> {
             to={routes.authorization.restore.getRoutePath()}
             className={b("restore-link")}
           >
-            {t(intl.restorePassword)}
+            {t(intl.restore)}
           </Link>
         </div>
       </form>
