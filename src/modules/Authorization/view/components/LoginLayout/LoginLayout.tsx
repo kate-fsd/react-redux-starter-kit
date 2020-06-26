@@ -1,7 +1,6 @@
 import React from 'react';
 import block from 'bem-cn';
 
-//import * as features from 'features';
 import * as login from 'features/authorization';
 import { withAsyncFeatures } from 'core';
 import { useTranslation, tKeys } from 'services/i18n';

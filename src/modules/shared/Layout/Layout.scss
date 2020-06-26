@@ -45,6 +45,10 @@
     align-items: center;
   }
 
+  &__authorization-nav {
+    margin: 0 20px;
+  }
+
   &__content {
     display: flex;
     flex-direction: column;
@@ -94,5 +98,6 @@
 
   .sign-up-card {
     width: 500px;
+    //background-color: green;
   }
 }

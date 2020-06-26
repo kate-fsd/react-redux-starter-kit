@@ -1,13 +1,12 @@
 import React from 'react';
 import block from 'bem-cn';
 
-//import * as features from 'features';
 import * as restore from 'features/authorization';
 import { withAsyncFeatures } from 'core';
 import { useTranslation, tKeys } from 'services/i18n';
 
 import { Layout } from '../../../../shared';
-//import './RestoreLayout.scss';
+import './RestoreLayout.scss';
 
 interface IFeatureProps {
   restoreFeatureEntry: restore.Entry;

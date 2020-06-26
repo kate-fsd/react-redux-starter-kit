@@ -12,8 +12,7 @@ import { IAppReduxState } from 'shared/types/app';
 
 import { ISignUpPayload } from '../../../namespace';
 import { actionCreators, selectors } from './../../../redux';
-
-//import './SignUpCard.scss';
+import './SignUpCard.scss';
 
 interface IOwnProps {
   //onSubmit(values: ISignUpPayload): void;

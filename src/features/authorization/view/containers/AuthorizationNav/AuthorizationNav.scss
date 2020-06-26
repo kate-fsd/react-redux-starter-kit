@@ -1,0 +1,16 @@
+.authorization-nav {
+  display: flex;
+  align-items: center;
+
+  &__user {
+    margin: 0 10px;
+  }
+
+  &__button {
+    margin: 0 10px;
+  }
+
+  &__roating-link {
+    text-decoration: none;
+  }
+}

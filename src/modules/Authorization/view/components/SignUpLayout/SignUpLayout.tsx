@@ -1,13 +1,12 @@
 import React from 'react';
 import block from 'bem-cn';
 
-//import * as features from 'features';
 import * as signUp from 'features/authorization';
 import { withAsyncFeatures } from 'core';
 import { useTranslation, tKeys } from 'services/i18n';
 
 import { Layout } from '../../../../shared';
-//import './SignUpLayout.scss';
+import './SignUpLayout.scss';
 
 interface IFeatureProps {
   signUpFeatureEntry: signUp.Entry;
