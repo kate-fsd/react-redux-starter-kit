@@ -84,7 +84,7 @@ export const en = {
       signUp: 'Sign up',
       emailWarning: 'Email should contain «@»',
       ruleLowcaseLetter: 'One lowcase letter',
-      ruelUppercaseLetter: 'One uppercase letter',
+      ruleUppercaseLetter: 'One uppercase letter',
       ruleDigit: 'One digit',
       ruleMinSigns: 'Min 8 signs',
       login: 'Login',

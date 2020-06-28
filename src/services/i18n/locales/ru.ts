@@ -86,7 +86,7 @@ export const ru = {
       signUp: 'Регистрация',
       emailWarning: 'Email должен содержать «@»',
       ruleLowcaseLetter: 'Одна строчная буква',
-      ruelUppercaseLetter: 'Одна заглавная буква',
+      ruleUppercaseLetter: 'Одна заглавная буква',
       ruleDigit: 'Одна цифра',
       ruleMinSigns: 'Минимум 8 знаков',
       login: 'Войти',
