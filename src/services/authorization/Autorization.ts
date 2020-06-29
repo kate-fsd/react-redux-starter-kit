@@ -8,6 +8,9 @@ import { firebaseConfig } from './firebaseConfig';
 import UserCredential = firebase.auth.UserCredential;
 
 class Authorization {
+  // static googleSignIn(): ((event: import("react").MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined {
+  //   throw new Error("Method not implemented.");
+  // }
   constructor() {
     firebase.initializeApp(firebaseConfig);
     firebase.auth();
@@ -16,9 +19,6 @@ class Authorization {
   public signUp = async (email: string, password: string): Promise<UserCredential> => 
     firebase.auth().createUserWithEmailAndPassword(email, password);
   
-
-
-
   public signIn = async (email: string, password: string): Promise<UserCredential> =>
     firebase.auth().signInWithEmailAndPassword(email, password);
 
@@ -26,6 +26,11 @@ class Authorization {
     firebase.auth().signOut();
   };
 
+
+  public googleSignIn = async (): Promise<void>  => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+  }
 
 
   public resetPassword = async (email: string): Promise<void> => {
@@ -42,5 +47,27 @@ class Authorization {
     });
   }
 }
+
+
+// var provider = new firebase.auth.GoogleAuthProvider();
+
+// function googleSignin() {
+//    firebase.auth()
+   
+//    .signInWithPopup(provider).then(function(result) {
+//       var token = result.credential.accessToken;
+//       var user = result.user;
+		
+//       console.log(token)
+//       console.log(user)
+//    }).catch(function(error) {
+//       var errorCode = error.code;
+//       var errorMessage = error.message;
+		
+//       console.log(error.code)
+//       console.log(error.message)
+//    });
+// }
+
 
 export { Authorization as AuthorizationApi };

@@ -91,6 +91,9 @@ export const en = {
       restore: 'Restore password',
       restorePassword: 'Restore password',
       restoreText: 'Remind us your email, and we will send a new password',
+      termsOfUseText: 'By clicking on the «Register» button, you agree to the terms of service',
+      termsOfUse: 'Terms of use',
+      mailing:'I do not want to receive a weekly newsletter with job search tips and news about the most sought-after professions'
     }
   },
   documents: {},
