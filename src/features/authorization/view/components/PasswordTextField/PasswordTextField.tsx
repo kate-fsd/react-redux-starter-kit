@@ -50,12 +50,6 @@ function PasswordTextFieldComponent(props: IProps & ITranslationProps) {
     setValues({ ...values, isShown: !values.isShown });
   };
 
-  // const handleMouseDownPassword = (
-  //   event: React.MouseEvent<HTMLButtonElement>
-  // ) => {
-  //   event.preventDefault();
-  // };
-
   const renderHelpers = () => {
     const { t, verification: v } = props;
     type IGetClasses = (condition: boolean) => string;
@@ -106,7 +100,6 @@ function PasswordTextFieldComponent(props: IProps & ITranslationProps) {
             <IconButton
               aria-label="toggle password visibility"
               onClick={handleClickShowPassword}
-              //onMouseDown={handleMouseDownPassword}
             >
               {values.isShown ? <Visibility /> : <VisibilityOff />}
             </IconButton>

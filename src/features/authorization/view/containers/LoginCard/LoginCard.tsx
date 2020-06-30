@@ -14,6 +14,9 @@ import { ILoginPayload } from "../../../namespace";
 import { actionCreators } from "../../../redux";
 import "./LoginCard.scss";
 
+//import { useHistory } from "react-router-dom";
+//import { browserHistory } from "react-router";
+
 
 type IActionProps = typeof mapDispatch;
 type IProps = IActionProps & ITranslationProps;
@@ -24,6 +27,7 @@ const mapDispatch = {
 
 const b = block("login-card");
 const { authorization: intl } = tKeys.features;
+//let history = useHistory();
 
 
 class LoginCardComponent extends React.PureComponent<IProps> {
@@ -39,7 +43,14 @@ class LoginCardComponent extends React.PureComponent<IProps> {
 
   @autobind
   private handleFormSubmit(values: ILoginPayload) {
-    this.props.login(values);
+    let promise = new Promise(() => {
+      this.props.login(values);
+    })
+    promise.then(() => {
+      //const history = useHistory();
+      //browserHistory.push("/");
+      console.log(9999)
+    })
   }
 
   @autobind

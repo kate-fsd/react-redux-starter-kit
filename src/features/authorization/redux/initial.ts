@@ -9,7 +9,9 @@ const initial: IReduxState = {
   communication: {
     signUp: initialCommunicationField,
     login: initialCommunicationField,
-    restore: initialCommunicationField
+    restore: initialCommunicationField,
+    logout: initialCommunicationField,
+    loginByGoogle: initialCommunicationField,
   }
 };
 

@@ -1,8 +1,9 @@
 .sign-up-card {
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 20px;
-  max-width: 500px;
+  max-width: 620px;
   width: 100%;
 
   &__login {
@@ -20,13 +21,48 @@
     }
   }
 
-  &__text-field {
+  &__title {
+    margin-bottom: 20px;
+    //font-family: "Gotham Pro";
+    text-align: center;
+    font-size: 22px;
+  }
+
+  &__service {
     margin-bottom: 10px;
+    cursor: pointer;
+  }
+
+  &__or {
+    margin-bottom: 24px;
+    font-weight: bold;
+  }
+
+  &__text-field {
+    margin-bottom: 20px;
+    max-width: 340px;
+    width: 100%;
   }
 
   &__button {
-    margin: 40px auto 20px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    width: 100%;
   }
 
+  &__terms-of-use-text {
+    font-size: 12px;
+    //color: rgb(175, 175, 175);
+  }
 
+  &__terms-of-use-link-wrap {
+    font-size: 12px;
+    //color: rgb(0, 97, 181);
+  }
+
+  &__mailing-checkbox .MuiTypography-root {
+    font-size: 12px;
+    //color: rgb(82, 95, 127);
+  }
 }

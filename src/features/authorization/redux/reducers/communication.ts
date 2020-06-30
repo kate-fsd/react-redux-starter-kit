@@ -36,4 +36,24 @@ export const communicationReducer = combineReducers<NS.IReduxState['communicatio
     'RESTORE_FAIL',
     initial.communication.restore,
   ),
+  logout: makeCommunicationReducer<
+  NS.ILogout,
+  NS.ILogoutSuccess,
+  NS.ILogoutFail
+  >(
+    'LOGOUT',
+    'LOGOUT_SUCCESS',
+    'LOGOUT_FAIL',
+    initial.communication.logout,
+  ),
+  loginByGoogle: makeCommunicationReducer<
+  NS.ILoginByGoogle,
+  NS.ILoginSuccess,
+  NS.ILoginFail
+  >(
+    'LOGIN_BY_GOOGLE',
+    'LOGIN_SUCCESS',
+    'LOGIN_FAIL',
+    initial.communication.loginByGoogle,
+  ),
 });

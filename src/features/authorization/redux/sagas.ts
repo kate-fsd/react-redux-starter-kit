@@ -20,12 +20,16 @@ function getSaga(deps: IDependencies) {
   const signUpType: NS.ISignUp['type'] = 'SIGN_UP';
   const LoginType: NS.ILogin['type'] = 'LOGIN';
   const RestoreType: NS.IRestore['type'] = 'RESTORE';
+  const LogoutType: NS.ILogout['type'] = 'LOGOUT';
+  const LoginByGoogleType: NS.ILoginByGoogle['type'] = 'LOGIN_BY_GOOGLE';
 
   return function* saga(): SagaIterator {
     yield all([
       takeLatest(signUpType, executeSignUp, deps),
       takeLatest(LoginType, executeLogin, deps),
-      takeLatest(RestoreType, executeRestore, deps)
+      takeLatest(RestoreType, executeRestore, deps),
+      takeLatest(LogoutType, executeLogout, deps),
+      takeLatest(LoginByGoogleType, executeLoginByGoogle, deps)
     ]);
   };
 }
@@ -68,6 +72,35 @@ function* executeRestore({ authorizationApi }: IDependencies, { payload }: NS.IR
 
     yield call(authorizationApi.resetPassword, email);
     yield put(notificationActionCreators.setNotification({ kind: 'info', text: 'New password was sent to your mail' }));
+
+  } catch (error) {
+    const errorMsg = getErrorMsg(error);
+
+    yield put(actionCreators.restoreFail(errorMsg));
+    yield put(notificationActionCreators.setNotification({ kind: 'error', text: errorMsg }));
+  }
+}
+
+function* executeLogout({ authorizationApi }: IDependencies) {
+  try {
+    yield call(authorizationApi.signOut);
+    yield put(actionCreators.logoutSuccess());
+    yield put(notificationActionCreators.setNotification({ kind: 'info', text: 'You successfully logged out!' }));
+
+  } catch (error) {
+    const errorMsg = getErrorMsg(error);
+
+    yield put(actionCreators.logoutFail(errorMsg));
+    yield put(notificationActionCreators.setNotification({ kind: 'error', text: errorMsg }));
+  }
+}
+
+function* executeLoginByGoogle({ authorizationApi }: IDependencies) {
+  try {
+    const loginResult: ILoginResult = yield call(authorizationApi.signInByGoogle);
+
+    yield put(actionCreators.loginSuccess({ email: loginResult.user.email }));
+    yield put(notificationActionCreators.setNotification({ kind: 'info', text: 'You successfully logged in!' }));
 
   } catch (error) {
     const errorMsg = getErrorMsg(error);

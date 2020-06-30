@@ -2,19 +2,26 @@ import React from "react";
 import block from "bem-cn";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { autobind } from "core-decorators";
 
 import { withTranslation, ITranslationProps, tKeys } from "services/i18n";
 import { Button } from "shared/view/elements";
 import { IAppReduxState } from "shared/types/app";
 
+import { actionCreators } from "../../../redux";
+
 import "./AuthorizationNav.scss";
-import { autobind } from "core-decorators";
 
-interface IStateProps {
+type IStateProps = {
   user: string;
-}
+};
+type IActionProps = typeof mapDispatch;
 
-type IProps = IStateProps & ITranslationProps;
+const mapDispatch = {
+  logout: actionCreators.logout,
+};
+
+type IProps = IStateProps & ITranslationProps & IActionProps;
 
 function mapState(state: IAppReduxState): IStateProps {
   // !!!!!!!!!!!
@@ -43,14 +50,19 @@ class AuthorizationNavComponent extends React.PureComponent<IProps> {
 
     return (
       <div className={b()}>
-        <div className={b("user")}>User: {user}</div>
+        <div className={b("user")}>
+          {t(intl.user)}: {user}
+        </div>
 
         <div className={b("button")}>
-          <Link to="/authorization/signUp" className={b("roating-link")}>
-            <Button type="button" variant="contained" size="small">
-              {t(intl.buttonSignUp)}
-            </Button>
-          </Link>
+          <Button
+            type="button"
+            variant="contained"
+            size="small"
+            onClick={this.props.logout}
+          >
+            {t(intl.buttonLogout)}
+          </Button>
         </div>
       </div>
     );
@@ -82,7 +94,10 @@ class AuthorizationNavComponent extends React.PureComponent<IProps> {
   }
 }
 
-const connectedComponent = connect(mapState)(AuthorizationNavComponent);
+const connectedComponent = connect(
+  mapState,
+  mapDispatch
+)(AuthorizationNavComponent);
 const AuthorizationNav = withTranslation()(connectedComponent);
 
 export {

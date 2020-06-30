@@ -8,6 +8,8 @@ export interface IReduxState {
     signUp: ICommunication;
     login: ICommunication;
     restore: ICommunication;
+    logout: ICommunication;
+    loginByGoogle: ICommunication;
   };
 }
 
@@ -33,7 +35,13 @@ export type IRestore = IAction<'RESTORE', IRestorePayload>;
 export type IRestoreSuccess = IPlainAction<'RESTORE_SUCCESS'>;
 export type IRestoreFail = IPlainFailAction<'RESTORE_FAIL'>;
 
-//export type ILogout = IPlainAction<'LOGOUT'>;
+export type ILogout = IPlainAction<'LOGOUT'>;
+export type ILogoutSuccess = IPlainAction<'LOGOUT_SUCCESS'>;
+export type ILogoutFail = IPlainFailAction<'LOGOUT_FAIL'>;
+
+
+export type ILoginByGoogle = IPlainAction<'LOGIN_BY_GOOGLE'>;
+
 
 export type IAction =
   | ISignUp
@@ -44,4 +52,8 @@ export type IAction =
   | ILoginFail
   | IRestore
   | IRestoreSuccess
-  | IRestoreFail;
+  | IRestoreFail
+  | ILoginByGoogle
+  | ILogout
+  | ILogoutSuccess
+  | ILogoutFail

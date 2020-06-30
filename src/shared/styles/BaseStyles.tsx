@@ -3,6 +3,8 @@ import { withStyles, WithStyles } from '@material-ui/core/styles';
 
 import { rule } from 'shared/helpers/style';
 
+import './fonts';
+
 const styles = {
   '@global': rule({
     html: {

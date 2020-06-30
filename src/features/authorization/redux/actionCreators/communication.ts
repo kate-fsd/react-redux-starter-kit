@@ -31,3 +31,22 @@ export const {
   'RESTORE_SUCCESS',
   'RESTORE_FAIL',
 );
+
+export const {
+  execute: logout,
+  completed: logoutSuccess,
+  failed: logoutFail,
+} = makeCommunicationActionCreators<NS.ILogout, NS.ILogoutSuccess, NS.ILogoutFail>(
+  'LOGOUT',
+  'LOGOUT_SUCCESS',
+  'LOGOUT_FAIL',
+);
+
+
+export const {
+  execute: loginByGoogle
+} = makeCommunicationActionCreators<NS.ILoginByGoogle, NS.ILoginSuccess, NS.ILoginFail>(
+  'LOGIN_BY_GOOGLE',
+  'LOGIN_SUCCESS',
+  'LOGIN_FAIL',
+);

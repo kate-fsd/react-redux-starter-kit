@@ -5,15 +5,15 @@ import { Link } from "react-router-dom";
 import { autobind } from "core-decorators";
 
 import { withTranslation, ITranslationProps, tKeys } from "services/i18n";
-import { Button } from "shared/view/elements";
 
+import { PATTERNS } from "../../constants";
+import { EmailTextField, Checkbox, Button } from "../../components";
 import { PasswordTextField } from "../../components/PasswordTextField/PasswordTextField";
-import { PATTERNS } from "../../../constants";
 import { ISignUpPayload } from "../../../namespace";
 import { actionCreators } from "./../../../redux";
+
+import google from "../../images/google.svg";
 import "./SignUpCard.scss";
-import { EmailTextField } from "../../components/EmailTextField/EmailTextField";
-import { Checkbox } from '../../components';
 
 type IState = {
   isSubmitFailed: boolean;
@@ -29,10 +29,11 @@ type IState = {
   isEmailValid: boolean;
 };
 type IActionProps = typeof mapDispatch;
-type IProps = IState & IActionProps & ITranslationProps;
+type IProps = IActionProps & ITranslationProps;
 
 const mapDispatch = {
   signUp: actionCreators.signUp,
+  loginByGoogle: actionCreators.loginByGoogle,
 };
 
 const b = block("sign-up-card");
@@ -72,24 +73,15 @@ class SignUpCardComponent extends React.Component<IProps> {
 
         <h2 className={b("title")}>{t(intl.signUp)}</h2>
 
-        {/* <Socials></Socials> */}
+        <div className={b("service")} onClick={this.props.loginByGoogle}>
+          <img src={google} />
+        </div>
+        {/* Ошибка: 
+        This domain (0.0.0.0) is not authorized to run thi…se console -> Auth section -> Sign in method tab
+
+        В firebase / sign up methods / Авторизованные домены нельзя добавить http://0.0.0.0:8080/, только localhost */}
 
         <div className={b("or")}>{t(intl.or)}</div>
-
-        {/* <Button variant="outlined" onClick={AuthorizationApi.googleSignIn}>
-            test
-        </Button> */}
-
-        {/* <div className={b("text-field")}>
-          <TextInputField
-            id="email"
-            name="email"
-            required={true}
-            type="email"
-            label={t(intl.email)}
-            t={t}
-          />
-        </div> */}
 
         <div className={b("text-field")}>
           <EmailTextField
@@ -111,13 +103,9 @@ class SignUpCardComponent extends React.Component<IProps> {
 
         <div className={b("button")}>
           <Button
-            variant="contained"
-            type="submit"
-            onClick={this.handleButtonClick}
-            className={b("test")}
-          >
-            {t(intl.buttonSignUp)}
-          </Button>
+            text={t(intl.buttonSignUp)}
+            clickHandler={this.handleButtonClick}
+          />
         </div>
 
         <div className={b("terms-of-use-text")}>{t(intl.termsOfUseText)}</div>
@@ -125,7 +113,7 @@ class SignUpCardComponent extends React.Component<IProps> {
         <div className={b("terms-of-use-link-wrap")}>
           (
           <a
-            href="/term-of-use"
+            href="/terms-of-use"
             className={b("terms-of-use-link")}
             target="_blank"
             rel="noopener noreferrer"
@@ -136,9 +124,7 @@ class SignUpCardComponent extends React.Component<IProps> {
         </div>
 
         <div className={b("mailing-checkbox")}>
-          <Checkbox
-           text={t(intl.mailing)}
-           />
+          <Checkbox text={t(intl.mailing)} />
         </div>
       </form>
     );
