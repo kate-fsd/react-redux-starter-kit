@@ -6,63 +6,88 @@
   max-width: 620px;
   width: 100%;
 
-  &__login {
-    align-self: flex-end;
-    margin-bottom: 20px;
-  }
 
-  &__login-link {
-    text-decoration: none;
+  // &__login {
+  //   align-self: flex-end;
+  //   margin-bottom: 20px;
+  // }
 
-    &::after {
-      display: inline;
-      content: "→";
-      font-size: 19px;
-    }
-  }
+  // &__login-link {
+  //   //color: rgb(0, 97, 181);
+  //   text-decoration: none;
+    
+  //   &::after {
+  //     display: inline;
+  //     content: "→";
+  //     font-size: 19px;
+  //   }
+  // }
 
-  &__title {
-    margin-bottom: 20px;
-    //font-family: "Gotham Pro";
-    text-align: center;
-    font-size: 22px;
-  }
+  // &__title {
+  //   margin-bottom: 20px;
+  //   //font-family: "Gotham Pro";
+  //   text-align: center;
+  //   font-size: 22px;
+  // }
 
-  &__service {
-    margin-bottom: 10px;
-    cursor: pointer;
-  }
+  // &__service {
+  //   margin-bottom: 10px;
+  //   cursor: pointer;
+  // }
 
-  &__or {
-    margin-bottom: 24px;
-    font-weight: bold;
-  }
+  // &__or {
+  //   margin-bottom: 24px;
+  //   font-weight: bold;
+  // }
 
-  &__text-field {
-    margin-bottom: 20px;
-    max-width: 340px;
-    width: 100%;
-  }
+  // &__text-field {
+  //   margin-bottom: 20px;
+  //   max-width: 340px;
+  //   width: 100%;
+  // }
 
-  &__button {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 30px;
-    width: 100%;
-  }
+  // &__button {
+  //   display: flex;
+  //   justify-content: center;
+  //   margin-bottom: 30px;
+  //   width: 100%;
+  // }
 
-  &__terms-of-use-text {
-    font-size: 12px;
-    //color: rgb(175, 175, 175);
-  }
+  // &__terms-of-use-text {
+  //   //пример
+  //   //text-align: center;
+  //   max-width: 340px;
+  //   width: 100%;
+  //   //text-align: center;
 
-  &__terms-of-use-link-wrap {
-    font-size: 12px;
-    //color: rgb(0, 97, 181);
-  }
+  //   color: rgba(175, 175, 175, 1);
+  //   font-size: 11px;
+  //   //text-align: center;
+  // }
 
-  &__mailing-checkbox .MuiTypography-root {
-    font-size: 12px;
-    //color: rgb(82, 95, 127);
-  }
+  // &__terms-of-use-link-wrapper {
+  //   margin-bottom: 20px;
+  //   font-size: 11px;
+  // }
+
+  // &__terms-of-use-link {
+  //   color: rgb(0, 97, 181);
+  // }
+
+  // //   // &-wrapper {
+  // //   //   margin-bottom: 20px;
+  // //   //   //font-size: 11px;
+  // //   // }
+  // // }
+
+  // // &__mailing-checkbox {
+  // //   max-width: 340px;
+  // //   width: 100%;
+
+  // //   .MuiTypography-root {
+  // //     color: rgb(82, 95, 127);
+  // //     font-size: 11px;
+  // //     line-height: 13px;
+  // //   }
+  // // }
 }

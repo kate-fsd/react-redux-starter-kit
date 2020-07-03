@@ -13,7 +13,7 @@ import { ISignUpPayload } from "../../../namespace";
 import { actionCreators } from "./../../../redux";
 
 import google from "../../images/google.svg";
-import "./SignUpCard.scss";
+//import "./SignUpCard.scss";
 
 type IState = {
   isSubmitFailed: boolean;
@@ -110,7 +110,7 @@ class SignUpCardComponent extends React.Component<IProps> {
 
         <div className={b("terms-of-use-text")}>{t(intl.termsOfUseText)}</div>
 
-        <div className={b("terms-of-use-link-wrap")}>
+        <div className={b("terms-of-use-link-wrapper")}>
           (
           <a
             href="/terms-of-use"
@@ -132,12 +132,12 @@ class SignUpCardComponent extends React.Component<IProps> {
 
   @autobind
   public handlePasswordChange(password: string): void {
-    this.setState({ ...this.state, password }, this.validatePassword);
+    this.setState({ ...this.state, password, isSubmitFailed: false }, this.validatePassword);
   }
 
   @autobind
   public handleEmailChange(email: string): void {
-    this.setState({ ...this.state, email }, this.validateEmail);
+    this.setState({ ...this.state, email, isSubmitFailed: false  }, this.validateEmail);
   }
 
   @autobind

@@ -43,14 +43,18 @@ class LoginCardComponent extends React.PureComponent<IProps> {
 
   @autobind
   private handleFormSubmit(values: ILoginPayload) {
-    let promise = new Promise(() => {
-      this.props.login(values);
-    })
-    promise.then(() => {
-      //const history = useHistory();
-      //browserHistory.push("/");
-      console.log(9999)
-    })
+    // let promise = new Promise(() => {
+    //   this.props.login(values);
+    // })
+    // promise.then(() => {
+    //   //const history = useHistory();
+    //   //browserHistory.push("/");
+    //   console.log(9999)
+    // }, () => {
+    //   console.log(1111)
+    // })
+
+    this.props.login(values);
   }
 
   @autobind

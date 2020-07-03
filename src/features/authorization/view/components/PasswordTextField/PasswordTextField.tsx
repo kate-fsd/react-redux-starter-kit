@@ -9,7 +9,7 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { block } from "bem-cn";
 
 import { tKeys, ITranslationProps, withTranslation } from "services/i18n";
-import "./PasswordTextField.scss";
+//import "./PasswordTextField.scss";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 
 type IState = {
