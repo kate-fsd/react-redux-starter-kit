@@ -17,25 +17,33 @@ class Authorization {
     email: string,
     password: string
   ): Promise<UserCredential> =>
-    firebase.auth().createUserWithEmailAndPassword(email, password);
+    await firebase.auth().createUserWithEmailAndPassword(email, password);
 
   public signIn = async (
     email: string,
     password: string
   ): Promise<UserCredential> =>
-    firebase.auth().signInWithEmailAndPassword(email, password);
+    await firebase.auth().signInWithEmailAndPassword(email, password);
 
   public resetPassword = async (email: string): Promise<void> => {
     await firebase.auth().sendPasswordResetEmail(email);
   };
 
   public signOut = async (): Promise<void> => {
-    firebase.auth().signOut();
+    await firebase.auth().signOut();
   };
 
-  public signInByGoogle = async (): Promise<void> => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider);
+  // public signInByGoogle = async (): Promise<void> => {
+  //   const provider = new firebase.auth.GoogleAuthProvider();
+  //   await firebase.auth().signInWithPopup(provider);
+  // };
+
+  public signInByGoogle = async (): Promise<UserCredential> => {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    //let userCredential: UserCredential;
+    return await firebase.auth().signInWithPopup(provider);
+
+    //return userCredential;
   };
 
   public async stateChanged(setUser: (user: string) => void): Promise<void> {

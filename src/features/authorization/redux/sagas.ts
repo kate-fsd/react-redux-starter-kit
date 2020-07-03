@@ -13,7 +13,7 @@ interface ISignUpResult {
 }
 
 interface ILoginResult {
-  user: {email: string}
+  user: {email: string, displayName: string}
 }
 
 function getSaga(deps: IDependencies) {
@@ -39,7 +39,7 @@ function* executeSignUp({ authorizationApi }: IDependencies, { payload }: NS.ISi
     const { email, password } = payload;
     const signUpResult: ISignUpResult = yield call(authorizationApi.signUp, email, password);
 
-    yield put(actionCreators.signUpSuccess({ email: signUpResult.user.email }));
+    yield put(actionCreators.signUpSuccess({ user: signUpResult.user.email }));
     yield put(notificationActionCreators.setNotification({ kind: 'info', text: 'You successfully signed up!' }));
 
   } catch (error) {
@@ -55,7 +55,7 @@ function* executeLogin({ authorizationApi }: IDependencies, { payload }: NS.ILog
     const { email, password } = payload;
     const loginResult: ILoginResult = yield call(authorizationApi.signIn, email, password);
 
-    yield put(actionCreators.loginSuccess({ email: loginResult.user.email }));
+    yield put(actionCreators.loginSuccess({ user: loginResult.user.email }));
     yield put(notificationActionCreators.setNotification({ kind: 'info', text: 'You successfully logged in!' }));
 
   } catch (error) {
@@ -99,7 +99,7 @@ function* executeLoginByGoogle({ authorizationApi }: IDependencies) {
   try {
     const loginResult: ILoginResult = yield call(authorizationApi.signInByGoogle);
 
-    yield put(actionCreators.loginSuccess({ email: loginResult.user.email }));
+    yield put(actionCreators.loginSuccess({ user: loginResult.user.displayName }));
     yield put(notificationActionCreators.setNotification({ kind: 'info', text: 'You successfully logged in!' }));
 
   } catch (error) {
