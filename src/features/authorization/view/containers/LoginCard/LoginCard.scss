@@ -1,13 +1,14 @@
 .login-card {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  align-items: center;
+  padding: 0 20px 20px;
   max-width: 470px;
   width: 100%;
 
   &__sign-up-routing {
     align-self: flex-end;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
 
   &__sign-up-link {
@@ -21,8 +22,18 @@
     }
   }
 
+  &__services-buttons {
+    margin-bottom: 20px;
+  }
+
+  &__or {
+    margin-bottom: 30px;
+    font-size: 20px;
+  }
+
   &__text-field {
     margin-bottom: 10px;
+    width: 100%;
   }
 
   &__button {

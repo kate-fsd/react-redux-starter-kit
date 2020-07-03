@@ -1,5 +1,5 @@
 import { ICommunication, IPlainFailAction, IAction, IPlainAction } from 'shared/types/redux';
-
+import { ILoginServices } from 'services/authorization/namespace'
 export interface IReduxState {
   data: {
     user: string;
@@ -9,12 +9,12 @@ export interface IReduxState {
     login: ICommunication;
     restore: ICommunication;
     logout: ICommunication;
-    loginByGoogle: ICommunication;
+    loginByService: ICommunication;
   };
 }
 
 export type ISignUpPayload = { email: string, password: string };
-export type ISignUpSuccessPayload = { email: string };
+export type ISignUpSuccessPayload = { user: string };
 
 export type ISignUp = IAction<'SIGN_UP', ISignUpPayload>;
 export type ISignUpSuccess = IAction<'SIGN_UP_SUCCESS', ISignUpSuccessPayload>;
@@ -22,7 +22,7 @@ export type ISignUpFail = IPlainFailAction<'SIGN_UP_FAIL'>;
 
 
 export type ILoginPayload = { email: string, password: string };
-export type ILoginSuccessPayload = { email: string };
+export type ILoginSuccessPayload = { user: string };
 
 export type ILogin = IAction<'LOGIN', ILoginPayload>;
 export type ILoginSuccess = IAction<'LOGIN_SUCCESS', ILoginSuccessPayload>;
@@ -40,7 +40,9 @@ export type ILogoutSuccess = IPlainAction<'LOGOUT_SUCCESS'>;
 export type ILogoutFail = IPlainFailAction<'LOGOUT_FAIL'>;
 
 
-export type ILoginByGoogle = IPlainAction<'LOGIN_BY_GOOGLE'>;
+export type ILoginByServicePayload = { service: ILoginServices }
+
+export type ILoginByService = IAction<'LOGIN_BY_SERVICE', ILoginByServicePayload>;
 
 
 export type IAction =
@@ -53,7 +55,7 @@ export type IAction =
   | IRestore
   | IRestoreSuccess
   | IRestoreFail
-  | ILoginByGoogle
+  | ILoginByService
   | ILogout
   | ILogoutSuccess
   | ILogoutFail

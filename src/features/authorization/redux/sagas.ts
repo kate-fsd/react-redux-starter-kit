@@ -17,19 +17,19 @@ interface ILoginResult {
 }
 
 function getSaga(deps: IDependencies) {
-  const signUpType: NS.ISignUp['type'] = 'SIGN_UP';
+  const SignUpType: NS.ISignUp['type'] = 'SIGN_UP';
   const LoginType: NS.ILogin['type'] = 'LOGIN';
   const RestoreType: NS.IRestore['type'] = 'RESTORE';
   const LogoutType: NS.ILogout['type'] = 'LOGOUT';
-  const LoginByGoogleType: NS.ILoginByGoogle['type'] = 'LOGIN_BY_GOOGLE';
+  const LoginByServiceType: NS.ILoginByService['type'] = 'LOGIN_BY_SERVICE';
 
   return function* saga(): SagaIterator {
     yield all([
-      takeLatest(signUpType, executeSignUp, deps),
+      takeLatest(SignUpType, executeSignUp, deps),
       takeLatest(LoginType, executeLogin, deps),
       takeLatest(RestoreType, executeRestore, deps),
       takeLatest(LogoutType, executeLogout, deps),
-      takeLatest(LoginByGoogleType, executeLoginByGoogle, deps)
+      takeLatest(LoginByServiceType, executeLoginByService, deps)
     ]);
   };
 }
@@ -95,9 +95,10 @@ function* executeLogout({ authorizationApi }: IDependencies) {
   }
 }
 
-function* executeLoginByGoogle({ authorizationApi }: IDependencies) {
+function* executeLoginByService({ authorizationApi }: IDependencies,  { payload }: NS.ILoginByService) {
   try {
-    const loginResult: ILoginResult = yield call(authorizationApi.signInByGoogle);
+    const { service } = payload;
+    const loginResult: ILoginResult = yield call(authorizationApi.signInByService, service);
 
     yield put(actionCreators.loginSuccess({ user: loginResult.user.displayName }));
     yield put(notificationActionCreators.setNotification({ kind: 'info', text: 'You successfully logged in!' }));

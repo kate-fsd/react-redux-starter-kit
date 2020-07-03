@@ -44,9 +44,9 @@ export const {
 
 
 export const {
-  execute: loginByGoogle
-} = makeCommunicationActionCreators<NS.ILoginByGoogle, NS.ILoginSuccess, NS.ILoginFail>(
-  'LOGIN_BY_GOOGLE',
+  execute: loginByService
+} = makeCommunicationActionCreators<NS.ILoginByService, NS.ILoginSuccess, NS.ILoginFail>(
+  'LOGIN_BY_SERVICE',
   'LOGIN_SUCCESS',
   'LOGIN_FAIL',
 );

@@ -11,7 +11,7 @@ import { routes } from "modules/routes";
 
 import { ILoginPayload } from "../../../namespace";
 import { actionCreators } from "../../../redux";
-import { EmailTextField, PasswordTextField } from '../../components';
+import { EmailTextField, PasswordTextField, ServicesButtons } from '../../components';
 
 import "./LoginCard.scss";
 
@@ -26,6 +26,7 @@ type IProps = IActionProps & ITranslationProps & IStateProps & RouteComponentPro
 
 const mapDispatch = {
   login: actionCreators.login,
+  loginByService: actionCreators.loginByService,
 };
 
 function mapState(state: IAppReduxState): IStateProps {
@@ -62,6 +63,12 @@ class LoginCardComponent extends React.Component<IProps> {
             {t(intl.signUp)}
           </Link>
         </div>
+
+        <div className={b("services-buttons")}>
+          <ServicesButtons loginByService={this.props.loginByService} />
+        </div>
+
+        <div className={b("or")}>{t(intl.or)}</div>
 
         <div className={b("text-field")}>
           <EmailTextField

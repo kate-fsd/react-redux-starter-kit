@@ -46,14 +46,14 @@ export const communicationReducer = combineReducers<NS.IReduxState['communicatio
     'LOGOUT_FAIL',
     initial.communication.logout,
   ),
-  loginByGoogle: makeCommunicationReducer<
-  NS.ILoginByGoogle,
+  loginByService: makeCommunicationReducer<
+  NS.ILoginByService,
   NS.ILoginSuccess,
   NS.ILoginFail
   >(
-    'LOGIN_BY_GOOGLE',
+    'LOGIN_BY_SERVICE',
     'LOGIN_SUCCESS',
     'LOGIN_FAIL',
-    initial.communication.loginByGoogle,
+    initial.communication.loginByService,
   ),
 });

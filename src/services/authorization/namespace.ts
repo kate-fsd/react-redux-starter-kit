@@ -1,0 +1,1 @@
+export type ILoginServices = "GOOGLE" | "FACEBOOK" | "TWITTER" | "GITHUB";

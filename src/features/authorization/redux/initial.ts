@@ -11,7 +11,7 @@ const initial: IReduxState = {
     login: initialCommunicationField,
     restore: initialCommunicationField,
     logout: initialCommunicationField,
-    loginByGoogle: initialCommunicationField,
+    loginByService: initialCommunicationField,
   }
 };
 

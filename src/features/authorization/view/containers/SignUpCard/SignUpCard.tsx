@@ -10,11 +10,14 @@ import { Button } from "shared/view/elements";
 import { IAppReduxState } from "shared/types/app";
 
 import { PATTERNS } from "../../constants";
-import { EmailTextField, PasswordTextField } from "../../components";
+import {
+  EmailTextField,
+  PasswordTextField,
+  ServicesButtons,
+} from "../../components";
 import { ISignUpPayload } from "../../../namespace";
 import { actionCreators } from "./../../../redux";
 
-import google from "../../images/google.svg";
 import "./SignUpCard.scss";
 
 type IState = {
@@ -39,7 +42,7 @@ type IProps = IActionProps &
 
 const mapDispatch = {
   signUp: actionCreators.signUp,
-  loginByGoogle: actionCreators.loginByGoogle,
+  loginByService: actionCreators.loginByService,
 };
 
 function mapState(state: IAppReduxState): IStateProps {
@@ -89,8 +92,8 @@ class SignUpCardComponent extends React.Component<IProps> {
           </Link>
         </div>
 
-        <div className={b("service")} onClick={this.props.loginByGoogle}>
-          <img src={google} />
+        <div className={b("services-buttons")}>
+          <ServicesButtons loginByService={this.props.loginByService} />
         </div>
 
         <div className={b("or")}>{t(intl.or)}</div>

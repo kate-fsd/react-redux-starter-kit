@@ -1,9 +1,9 @@
-/* eslint-disable class-methods-use-this */
 import * as firebase from "firebase";
 
 import "firebase/auth";
 
 import { firebaseConfig } from "./firebaseConfig";
+import { ILoginServices } from "./namespace";
 
 import UserCredential = firebase.auth.UserCredential;
 
@@ -33,28 +33,32 @@ class Authorization {
     await firebase.auth().signOut();
   };
 
-  // public signInByGoogle = async (): Promise<void> => {
-  //   const provider = new firebase.auth.GoogleAuthProvider();
-  //   await firebase.auth().signInWithPopup(provider);
-  // };
+  public signInByService = async (service: ILoginServices): Promise<UserCredential> => {
+    let provider;
 
-  public signInByGoogle = async (): Promise<UserCredential> => {
-    var provider = new firebase.auth.GoogleAuthProvider();
-    //let userCredential: UserCredential;
+    console.log(service)
+
+    switch (service) {
+      case "GOOGLE":
+        provider = new firebase.auth.GoogleAuthProvider();
+        break;
+      case "FACEBOOK":
+        provider = new firebase.auth.FacebookAuthProvider();
+        break;
+      case "TWITTER":
+        provider = new firebase.auth.TwitterAuthProvider();
+        break;
+      case "GITHUB":
+        provider = new firebase.auth.GithubAuthProvider();
+        break;
+      default:
+        provider = null;
+    }
+
+    if (!provider) throw new Error('Oops, something went wrong!');
+
     return await firebase.auth().signInWithPopup(provider);
-
-    //return userCredential;
   };
-
-  public async stateChanged(setUser: (user: string) => void): Promise<void> {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user && user.email) {
-        setUser(user.email);
-      } else {
-        setUser("");
-      }
-    });
-  }
 }
 
 export { Authorization as AuthorizationApi };
