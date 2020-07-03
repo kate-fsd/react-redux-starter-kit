@@ -13,4 +13,4 @@ export default function CheckboxComponent(props: IProps) {
   );
 }
 
-export { CheckboxComponent as Checkbox };
+//export { CheckboxComponent as Checkbox };

@@ -1,16 +1,17 @@
 import React from "react";
-import IconButton from "@material-ui/core/IconButton";
-import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import {
+  Input,
+  IconButton,
+  InputLabel,
+  InputAdornment,
+  FormHelperText,
+  FormControl,
+} from "@material-ui/core";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { block } from "bem-cn";
 
 import { tKeys, ITranslationProps, withTranslation } from "services/i18n";
-//import "./PasswordTextField.scss";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
+import "./PasswordTextField.scss";
 
 type IState = {
   password: string;
@@ -18,15 +19,15 @@ type IState = {
 };
 
 type IProps = {
-  hasHelpers: boolean;
+  hasHelpers?: boolean;
   onPasswordChanged: (password: string) => void;
-  verification: {
+  verification?: {
     hasLowcaseLetter: boolean;
     hasUppercaseLetter: boolean;
     hasDigit: boolean;
     hasEightSigns: boolean;
   };
-  isError: boolean;
+  isError?: boolean;
 };
 
 const b = block("password-text-field");
@@ -52,12 +53,13 @@ function PasswordTextFieldComponent(props: IProps & ITranslationProps) {
 
   const renderHelpers = () => {
     const { t, verification: v } = props;
+    if (!v) return;
     type IGetClasses = (condition: boolean) => string;
-    const getClasses: IGetClasses = (condition: boolean): string =>
+    const getClasses: IGetClasses = (condition?: boolean): string =>
       condition ? b("helper", { type: "success" }) : b("helper");
 
     return (
-      <FormHelperText id="password-text-field-helper" component="div">
+      <FormHelperText component="div">
         <div className={b("helpers")}>
           <div className={b("helpers-column")}>
             <div className={getClasses(v.hasLowcaseLetter)}>
@@ -81,7 +83,6 @@ function PasswordTextFieldComponent(props: IProps & ITranslationProps) {
 
   return (
     <FormControl
-      variant="outlined"
       fullWidth={true}
       required={true}
       error={props.isError}
@@ -89,7 +90,7 @@ function PasswordTextFieldComponent(props: IProps & ITranslationProps) {
       <InputLabel htmlFor="password-text-field">
         {props.t(intl.password)}
       </InputLabel>
-      <OutlinedInput
+      <Input
         id="password-text-field"
         name="password"
         type={values.isShown ? "text" : "password"}
@@ -106,9 +107,8 @@ function PasswordTextFieldComponent(props: IProps & ITranslationProps) {
           </InputAdornment>
         }
         aria-describedby="password-text-field-helper"
-        labelWidth={75}
       />
-      {props.hasHelpers && renderHelpers()}
+      {props.hasHelpers && props.verification && renderHelpers()}
     </FormControl>
   );
 }

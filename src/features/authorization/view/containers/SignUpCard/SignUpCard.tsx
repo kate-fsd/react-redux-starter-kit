@@ -1,19 +1,21 @@
 import React from "react";
 import block from "bem-cn";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { autobind } from "core-decorators";
+import { FormGroup, FormControlLabel, Checkbox } from "@material-ui/core";
 
 import { withTranslation, ITranslationProps, tKeys } from "services/i18n";
+import { Button } from "shared/view/elements";
+import { IAppReduxState } from "shared/types/app";
 
 import { PATTERNS } from "../../constants";
-import { EmailTextField, Checkbox, Button } from "../../components";
-import { PasswordTextField } from "../../components/PasswordTextField/PasswordTextField";
+import { EmailTextField, PasswordTextField } from "../../components";
 import { ISignUpPayload } from "../../../namespace";
 import { actionCreators } from "./../../../redux";
 
 import google from "../../images/google.svg";
-//import "./SignUpCard.scss";
+import "./SignUpCard.scss";
 
 type IState = {
   isSubmitFailed: boolean;
@@ -28,13 +30,23 @@ type IState = {
   email: string;
   isEmailValid: boolean;
 };
+type IStateProps = { user: string };
 type IActionProps = typeof mapDispatch;
-type IProps = IActionProps & ITranslationProps;
+type IProps = IActionProps &
+  ITranslationProps &
+  IStateProps &
+  RouteComponentProps;
 
 const mapDispatch = {
   signUp: actionCreators.signUp,
   loginByGoogle: actionCreators.loginByGoogle,
 };
+
+function mapState(state: IAppReduxState): IStateProps {
+  return {
+    user: state.authorization.data.user,
+  };
+}
 
 const b = block("sign-up-card");
 const { authorization: intl } = tKeys.features;
@@ -54,6 +66,12 @@ class SignUpCardComponent extends React.Component<IProps> {
     isEmailValid: false,
   };
 
+  public componentDidUpdate(prevProps: IProps) {
+    if (prevProps.user !== this.props.user && this.props.user !== "") {
+      this.props.history.push("/");
+    }
+  }
+
   public render() {
     const { t } = this.props;
     const {
@@ -65,21 +83,15 @@ class SignUpCardComponent extends React.Component<IProps> {
 
     return (
       <form className={b()} onSubmit={this.handleSubmit}>
-        <div className={b("login")}>
+        <div className={b("login-routing")}>
           <Link to="/authorization/login" className={b("login-link")}>
             {t(intl.login)}
           </Link>
         </div>
 
-        <h2 className={b("title")}>{t(intl.signUp)}</h2>
-
         <div className={b("service")} onClick={this.props.loginByGoogle}>
           <img src={google} />
         </div>
-        {/* Ошибка: 
-        This domain (0.0.0.0) is not authorized to run thi…se console -> Auth section -> Sign in method tab
-
-        В firebase / sign up methods / Авторизованные домены нельзя добавить http://0.0.0.0:8080/, только localhost */}
 
         <div className={b("or")}>{t(intl.or)}</div>
 
@@ -103,9 +115,12 @@ class SignUpCardComponent extends React.Component<IProps> {
 
         <div className={b("button")}>
           <Button
-            text={t(intl.buttonSignUp)}
-            clickHandler={this.handleButtonClick}
-          />
+            type="submit"
+            variant="outlined"
+            onClick={this.handleButtonClick}
+          >
+            {t(intl.buttonSignUp)}
+          </Button>
         </div>
 
         <div className={b("terms-of-use-text")}>{t(intl.termsOfUseText)}</div>
@@ -124,7 +139,12 @@ class SignUpCardComponent extends React.Component<IProps> {
         </div>
 
         <div className={b("mailing-checkbox")}>
-          <Checkbox text={t(intl.mailing)} />
+          <FormGroup row>
+            <FormControlLabel
+              control={<Checkbox color="primary" />}
+              label={t(intl.mailing)}
+            />
+          </FormGroup>
         </div>
       </form>
     );
@@ -132,12 +152,18 @@ class SignUpCardComponent extends React.Component<IProps> {
 
   @autobind
   public handlePasswordChange(password: string): void {
-    this.setState({ ...this.state, password, isSubmitFailed: false }, this.validatePassword);
+    this.setState(
+      { ...this.state, password, isSubmitFailed: false },
+      this.validatePassword
+    );
   }
 
   @autobind
   public handleEmailChange(email: string): void {
-    this.setState({ ...this.state, email, isSubmitFailed: false  }, this.validateEmail);
+    this.setState(
+      { ...this.state, email, isSubmitFailed: false },
+      this.validateEmail
+    );
   }
 
   @autobind
@@ -204,7 +230,8 @@ class SignUpCardComponent extends React.Component<IProps> {
   }
 }
 
-const connectedComponent = connect(undefined, mapDispatch)(SignUpCardComponent);
-const SignUpCard = withTranslation()(connectedComponent);
+const connectedComponent = connect(mapState, mapDispatch)(SignUpCardComponent);
+const TransatedSignUpCard = withTranslation()(connectedComponent);
+const SignUpCard = withRouter(TransatedSignUpCard);
 
 export { SignUpCard, SignUpCardComponent, IProps as ISignUpProps };

@@ -1,68 +1,60 @@
 import React from "react";
 import block from "bem-cn";
 import { connect } from "react-redux";
-import { Form, FormRenderProps } from "react-final-form";
-import { Link } from "react-router-dom";
+import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 import { autobind } from "core-decorators";
 
 import { withTranslation, ITranslationProps, tKeys } from "services/i18n";
-import { TextInputField } from "shared/view/form";
+import { IAppReduxState } from "shared/types/app";
 import { Button } from "shared/view/elements";
-
 import { routes } from "modules/routes";
+
 import { ILoginPayload } from "../../../namespace";
 import { actionCreators } from "../../../redux";
+import { EmailTextField, PasswordTextField } from '../../components';
+
 import "./LoginCard.scss";
 
-//import { useHistory } from "react-router-dom";
-//import { browserHistory } from "react-router";
 
-
+type IState = {
+  password: string;
+  email: string;
+};
+type IStateProps = { user: string };
 type IActionProps = typeof mapDispatch;
-type IProps = IActionProps & ITranslationProps;
+type IProps = IActionProps & ITranslationProps & IStateProps & RouteComponentProps;
 
 const mapDispatch = {
   login: actionCreators.login,
 };
 
+function mapState(state: IAppReduxState): IStateProps {
+  return {
+    user: state.authorization.data.user,
+  };
+}
+
 const b = block("login-card");
 const { authorization: intl } = tKeys.features;
-//let history = useHistory();
 
+class LoginCardComponent extends React.Component<IProps> {
+  state: IState = {
+    password: "",
+    email: "",
+  };
 
-class LoginCardComponent extends React.PureComponent<IProps> {
+  public componentDidUpdate(prevProps: IProps) {
+    if (prevProps.user !== this.props.user && this.props.user !== "") {
+      this.props.history.push('/');
+    }
+  }
+
   public render() {
-    return (
-      <Form
-        onSubmit={this.handleFormSubmit}
-        render={this.renderForm}
-        subscription={{}}
-      />
-    );
-  }
-
-  @autobind
-  private handleFormSubmit(values: ILoginPayload) {
-    // let promise = new Promise(() => {
-    //   this.props.login(values);
-    // })
-    // promise.then(() => {
-    //   //const history = useHistory();
-    //   //browserHistory.push("/");
-    //   console.log(9999)
-    // }, () => {
-    //   console.log(1111)
-    // })
-
-    this.props.login(values);
-  }
-
-  @autobind
-  private renderForm({ handleSubmit }: FormRenderProps) {
     const { t } = this.props;
+
     return (
-      <form className={b()} onSubmit={handleSubmit}>
-        <div className={b("sign-up")}>
+      <form className={b()} onSubmit={this.handleSubmit}>
+        <div className={b("sign-up-routing")}>
           <Link
             to={routes.authorization.signUp.getRoutePath()}
             className={b("sign-up-link")}
@@ -72,34 +64,25 @@ class LoginCardComponent extends React.PureComponent<IProps> {
         </div>
 
         <div className={b("text-field")}>
-          <TextInputField
-            id="email"
-            name="email"
-            required={true}
-            type="email"
-            label={t(intl.email)}
-            t={t}
+          <EmailTextField
+            onEmailChanged={this.handleEmailChange}
+            value={this.state.email}
           />
         </div>
 
         <div className={b("text-field")}>
-          <TextInputField
-            id="password"
-            name="password"
-            required={true}
-            type="password"
-            label={t(intl.password)}
-            t={t}
+          <PasswordTextField
+            onPasswordChanged={this.handlePasswordChange}
           />
         </div>
 
         <div className={b("button")}>
-          <Button variant="outlined" type="submit" >
+          <Button type="submit" variant="outlined">
             {t(intl.buttonLogin)}
           </Button>
         </div>
 
-        <div className={b("restore")}>
+        <div className={b("restore-routing")}>
           <Link
             to={routes.authorization.restore.getRoutePath()}
             className={b("restore-link")}
@@ -110,9 +93,30 @@ class LoginCardComponent extends React.PureComponent<IProps> {
       </form>
     );
   }
+
+  @autobind
+  public handlePasswordChange(password: string): void {
+    this.setState({ ...this.state, password });
+  }
+
+  @autobind
+  public handleEmailChange(email: string): void {
+    this.setState({ ...this.state, email });
+  }
+
+  @autobind
+  private handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const values: ILoginPayload = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+    this.props.login(values);
+  }
 }
 
-const connectedComponent = connect(undefined, mapDispatch)(LoginCardComponent);
-const LoginCard = withTranslation()(connectedComponent);
+const connectedComponent = connect(mapState, mapDispatch)(LoginCardComponent);
+const TransatedLoginCard = withTranslation()(connectedComponent);
+const LoginCard = withRouter(TransatedLoginCard);
 
 export { LoginCard, LoginCardComponent, IProps as ILoginProps };

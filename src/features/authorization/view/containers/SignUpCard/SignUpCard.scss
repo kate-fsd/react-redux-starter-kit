@@ -3,91 +3,74 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  max-width: 620px;
+  max-width: 470px;
   width: 100%;
 
+  &__login-routing {
+    align-self: flex-end;
+    margin-bottom: 20px;
+  }
 
-  // &__login {
-  //   align-self: flex-end;
-  //   margin-bottom: 20px;
-  // }
+  &__login-link {
+    color: rgb(0, 97, 181);
+    text-decoration: none;
 
-  // &__login-link {
-  //   //color: rgb(0, 97, 181);
-  //   text-decoration: none;
-    
-  //   &::after {
-  //     display: inline;
-  //     content: "→";
-  //     font-size: 19px;
-  //   }
-  // }
+    &::after {
+      display: inline;
+      content: "→";
+      font-size: 19px;
+    }
+  }
 
-  // &__title {
-  //   margin-bottom: 20px;
-  //   //font-family: "Gotham Pro";
-  //   text-align: center;
-  //   font-size: 22px;
-  // }
+  &__service {
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
 
-  // &__service {
-  //   margin-bottom: 10px;
-  //   cursor: pointer;
-  // }
+  &__or {
+    margin-bottom: 24px;
+    font-weight: bold;
+  }
 
-  // &__or {
-  //   margin-bottom: 24px;
-  //   font-weight: bold;
-  // }
+  &__text-field {
+    margin-bottom: 10px;
+    width: 100%;
+  }
 
-  // &__text-field {
-  //   margin-bottom: 20px;
-  //   max-width: 340px;
-  //   width: 100%;
-  // }
+  &__button {
+    margin: 40px auto;
+  }
 
-  // &__button {
-  //   display: flex;
-  //   justify-content: center;
-  //   margin-bottom: 30px;
-  //   width: 100%;
-  // }
+  &__terms-of-use-text {
+    max-width: 340px;
+    //width: 100%;
+    color: rgba(175, 175, 175, 1);
+    text-align: center;
+    font-size: 11px;
+  }
 
-  // &__terms-of-use-text {
-  //   //пример
-  //   //text-align: center;
-  //   max-width: 340px;
-  //   width: 100%;
-  //   //text-align: center;
+  &__terms-of-use-link-wrapper {
+    margin-bottom: 20px;
+    font-size: 11px;
+  }
 
-  //   color: rgba(175, 175, 175, 1);
-  //   font-size: 11px;
-  //   //text-align: center;
-  // }
+  &__terms-of-use-link {
+    color: rgb(0, 97, 181);
+  }
 
-  // &__terms-of-use-link-wrapper {
-  //   margin-bottom: 20px;
-  //   font-size: 11px;
-  // }
+  &-wrapper {
+    margin-bottom: 20px;
+    font-size: 11px;
+  }
 
-  // &__terms-of-use-link {
-  //   color: rgb(0, 97, 181);
-  // }
+  &__mailing-checkbox {
+    max-width: 400px;
+    width: 100%;
 
-  // //   // &-wrapper {
-  // //   //   margin-bottom: 20px;
-  // //   //   //font-size: 11px;
-  // //   // }
-  // // }
-
-  // // &__mailing-checkbox {
-  // //   max-width: 340px;
-  // //   width: 100%;
-
-  // //   .MuiTypography-root {
-  // //     color: rgb(82, 95, 127);
-  // //     font-size: 11px;
-  // //     line-height: 13px;
-  // //   }
-  // // }
+    .MuiTypography-root {
+      color: rgb(82, 95, 127);
+      font-size: 11px;
+      line-height: 13px;
+    }
+  }
 }

@@ -2,12 +2,12 @@ import React from "react";
 
 import TextField from "@material-ui/core/TextField";
 
-//import './EmailTextField.scss';
+import './EmailTextField.scss';
 
 type IProps = {
   onEmailChanged: (email: string) => void;
-  isError: boolean;
-  error: string;
+  isError?: boolean;
+  error?: string;
   value: string;
 };
 
@@ -17,11 +17,11 @@ function EmailTextField(props: IProps) {
     props.onEmailChanged(email);
   };
 
-  const helperText: string | null = props.isError ? props.error : null;
+  const helperText: string | null = props.isError && props.error ? props.error : null;
 
   return (
     <TextField
-      id="email-text-field"
+      //id="email-text-field"
       name="email"
       type="email"
       label="Email"
@@ -32,7 +32,6 @@ function EmailTextField(props: IProps) {
       className={"email-text-field"}
       fullWidth={true}
       value={props.value}
-      variant="outlined"
     />
   );
 }

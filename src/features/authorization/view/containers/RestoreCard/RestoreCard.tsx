@@ -65,7 +65,7 @@ class RestoreCardComponent extends React.PureComponent<IProps> {
         </div>
 
         <div className={b("button")}>
-          <Button variant="outlined" type="submit">
+          <Button type="submit" variant="outlined">
             {t(intl.buttonRestore)}
           </Button>
         </div>

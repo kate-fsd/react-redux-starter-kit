@@ -38,6 +38,7 @@ const b = block("layout");
 const { header, footer } = tKeys.shared;
 
 class LayoutComponent extends React.Component<IProps> {
+
   public render() {
     const {
       children,
