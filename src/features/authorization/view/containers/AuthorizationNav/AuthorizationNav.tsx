@@ -24,7 +24,6 @@ const mapDispatch = {
 type IProps = IStateProps & ITranslationProps & IActionProps;
 
 function mapState(state: IAppReduxState): IStateProps {
-  // !!!!!!!!!!!
   const user = state.authorization ? state.authorization.data.user : "";
 
   return {

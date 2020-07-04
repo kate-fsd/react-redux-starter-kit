@@ -11,10 +11,13 @@ import { routes } from "modules/routes";
 
 import { ILoginPayload } from "../../../namespace";
 import { actionCreators } from "../../../redux";
-import { EmailTextField, PasswordTextField, ServicesButtons } from '../../components';
+import {
+  EmailTextField,
+  PasswordTextField,
+  ServicesButtons,
+} from "../../components";
 
 import "./LoginCard.scss";
-
 
 type IState = {
   password: string;
@@ -22,7 +25,10 @@ type IState = {
 };
 type IStateProps = { user: string };
 type IActionProps = typeof mapDispatch;
-type IProps = IActionProps & ITranslationProps & IStateProps & RouteComponentProps;
+type IProps = IActionProps &
+  ITranslationProps &
+  IStateProps &
+  RouteComponentProps;
 
 const mapDispatch = {
   login: actionCreators.login,
@@ -46,7 +52,7 @@ class LoginCardComponent extends React.Component<IProps> {
 
   public componentDidUpdate(prevProps: IProps) {
     if (prevProps.user !== this.props.user && this.props.user !== "") {
-      this.props.history.push('/');
+      this.props.history.push("/");
     }
   }
 
@@ -78,9 +84,7 @@ class LoginCardComponent extends React.Component<IProps> {
         </div>
 
         <div className={b("text-field")}>
-          <PasswordTextField
-            onPasswordChanged={this.handlePasswordChange}
-          />
+          <PasswordTextField onPasswordChanged={this.handlePasswordChange} />
         </div>
 
         <div className={b("button")}>

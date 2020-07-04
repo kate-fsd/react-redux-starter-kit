@@ -36,8 +36,6 @@ class Authorization {
   public signInByService = async (service: ILoginServices): Promise<UserCredential> => {
     let provider;
 
-    console.log(service)
-
     switch (service) {
       case "GOOGLE":
         provider = new firebase.auth.GoogleAuthProvider();

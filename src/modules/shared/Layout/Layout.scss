@@ -1,4 +1,4 @@
-@import '~shared/styles/mixins';
+@import "~shared/styles/mixins";
 
 .layout {
   $header-footer-height: 3rem;
@@ -45,8 +45,34 @@
     align-items: center;
   }
 
-  &__authorization-nav {
-    margin: 0 20px;
+  &__authorization {
+    &-icon {
+      display: flex;
+      margin: 0 20px;
+
+      @include breakpoint-up(md) {
+        display: none;
+      }
+    }
+
+    &-nav {
+      position: absolute;
+      top: 3rem;
+      right: 0;
+      display: none;
+      padding: 9px;
+      background: #333;
+
+      @include breakpoint-up(md) {
+        position: static;
+        display: block;
+        // ???не работает padding
+      }
+
+      &_open {
+        display: block;
+      }
+    }
   }
 
   &__content {
@@ -94,10 +120,5 @@
       font-family: inherit;
       cursor: pointer;
     }
-  }
-
-  .sign-up-card {
-    width: 500px;
-    //background-color: green;
   }
 }

@@ -10,7 +10,7 @@
   &__title {
     display: none;
 
-    @include breakpoint-up(sm) {
+    @include breakpoint-up(md) {
       display: inline;
     }
   }
@@ -18,7 +18,7 @@
   &__menu-icon {
     display: flex;
 
-    @include breakpoint-up(sm) {
+    @include breakpoint-up(md) {
       display: none;
     }
 
@@ -35,7 +35,7 @@
   &__menu-items {
     display: none;
 
-    @include breakpoint-up(sm) {
+    @include breakpoint-up(md) {
       display: flex;
       flex-direction: row;
       margin-left: 1rem;
@@ -49,14 +49,14 @@
     text-align: center;
     text-decoration: none;
 
-    @include breakpoint-up(sm) {
+    @include breakpoint-up(md) {
       background: #333;
     }
 
     &_active {
       background: #666;
 
-      @include breakpoint-up(sm) {
+      @include breakpoint-up(md) {
         background: #555;
       }
     }

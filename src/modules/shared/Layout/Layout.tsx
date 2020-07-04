@@ -2,6 +2,7 @@ import React from "react";
 import block from "bem-cn";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { autobind } from "core-decorators";
+import { default as AccountCircleRoundedIcon } from "@material-ui/icons/AccountCircleRounded";
 
 import {
   LanguageSelector,
@@ -12,6 +13,7 @@ import {
 import { memoizeByProps } from "shared/helpers";
 import { withAsyncFeatures } from "core";
 import * as features from "features";
+import { AuthorizationNav } from "features/authorization/view/containers";
 
 import { routes } from "../../routes";
 import {
@@ -19,10 +21,14 @@ import {
   IHeaderMenuItem,
 } from "./LayoutHeaderMenu/LayoutHeaderMenu";
 import "./Layout.scss";
-import { AuthorizationNav } from "features/authorization/view/containers/AuthorizationNav/AuthorizationNav";
+import { ClickAwayListener } from "@material-ui/core";
 
 interface IOwnProps {
   title: string;
+}
+
+interface IState {
+  isAuthNavOpen: boolean;
 }
 
 interface IFeatureProps {
@@ -37,7 +43,10 @@ type IProps = IOwnProps &
 const b = block("layout");
 const { header, footer } = tKeys.shared;
 
-class LayoutComponent extends React.Component<IProps> {
+class LayoutComponent extends React.Component<IProps, IState> {
+  public state: IState = {
+    isAuthNavOpen: false,
+  };
 
   public render() {
     const {
@@ -48,6 +57,9 @@ class LayoutComponent extends React.Component<IProps> {
       t,
     } = this.props;
     const { ProfilePreview } = containers;
+    const authNavClass: string = this.state.isAuthNavOpen
+      ? b("authorization-nav", { open: true })
+      : b("authorization-nav");
 
     return (
       <div className={b()}>
@@ -60,9 +72,24 @@ class LayoutComponent extends React.Component<IProps> {
               />
             </div>
             <div className={b("right-menu")}>
-              <div className={b("authorization-nav")}>
-                <AuthorizationNav />
+              <div
+                className={b("authorization-icon")}
+                onClick={this.handleAuthIconClick}
+                onTouchEnd={this.handleAuthIconTouch}
+              >
+                <AccountCircleRoundedIcon />
               </div>
+
+              <ClickAwayListener
+                onClickAway={this.handleAuthNavClickAway}
+                mouseEvent="onClick"
+                touchEvent="onTouchEnd"
+              >
+                <div className={authNavClass}>
+                  <AuthorizationNav />
+                </div>
+              </ClickAwayListener>
+
               <ProfilePreview onEditClick={this.handleEditProfileClick} />
               <div className={b("language-selector")}>
                 <LanguageSelector />
@@ -109,6 +136,28 @@ class LayoutComponent extends React.Component<IProps> {
   private handleEditProfileClick() {
     const { history } = this.props;
     history.push(routes.profile.getRoutePath());
+  }
+
+  @autobind
+  private handleAuthIconClick(e: React.MouseEvent<HTMLDivElement>) {
+    this.toggleAuthNav(e);
+  }
+
+  @autobind
+  private handleAuthIconTouch(e: React.TouchEvent<HTMLDivElement>) {
+    this.toggleAuthNav(e);
+  }
+
+  @autobind
+  private handleAuthNavClickAway() {
+    this.setState({ isAuthNavOpen: false });
+  }
+
+  private toggleAuthNav(e: React.SyntheticEvent) {
+    e.preventDefault();
+    this.setState((prevState: IState) => ({
+      isAuthNavOpen: !prevState.isAuthNavOpen,
+    }));
   }
 }
 
